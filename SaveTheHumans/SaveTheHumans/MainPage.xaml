@@ -65,7 +65,7 @@
             <TextBlock TextWrapping="Wrap" Text="Avoid These" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ContentControl Content="ContentControl" HorizontalAlignment="Center" VerticalAlignment="Center" Template="{StaticResource EnemyTemplate}"/>
         </StackPanel>
-        <ProgressBar Grid.Column="4" Grid.Row="2" Height="20"/>
+        <ProgressBar x:Name="progressBar" Grid.Column="4" Grid.Row="2" Height="20"/>
         <Canvas x:Name="playArea" Grid.Row="1" Grid.ColumnSpan="6">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -73,7 +73,7 @@
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
             </Canvas.Background>
-            <StackPanel x:Name="human" Orientation="Vertical">
+            <StackPanel x:Name="human" Orientation="Vertical" PointerPressed="human_PointerPressed">
                 <Ellipse Fill="White" Height="10" Stroke="Black" Width="10"/>
                 <Rectangle Fill="White" Height="25" Stroke="Black" Width="10"/>
             </StackPanel>
