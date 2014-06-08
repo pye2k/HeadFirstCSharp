@@ -29,9 +29,9 @@ namespace SaveTheHumans
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         Random random = new Random();
-        DispatcherTimer enemyTimer = new DispatcherTimer();
-        DispatcherTimer targetTimer = new DispatcherTimer();
-        bool humanCaptured = false;
+        DispatcherTimer enemyTimer = new DispatcherTimer(); // timer to control when new enemies appear
+        DispatcherTimer targetTimer = new DispatcherTimer(); // timer to check whether we've reached the target
+        bool humanCaptured = false; // is the human captured by the mouse?
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -58,13 +58,20 @@ namespace SaveTheHumans
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
 
+            // draw a new enemy every 2 seconds
             enemyTimer.Tick += enemyTimer_Tick;
             enemyTimer.Interval = TimeSpan.FromSeconds(2);
 
+            // check the state of the game every 100ms
             targetTimer.Tick += targetTimer_Tick;
             targetTimer.Interval = TimeSpan.FromSeconds(.1);
         }
 
+        /// <summary>
+        /// Increment the progressBar. When progressBar reaches the end, end the game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void targetTimer_Tick(object sender, object e)
         {
             progressBar.Value += 1;
@@ -74,6 +81,9 @@ namespace SaveTheHumans
             }
         }
 
+        /// <summary>
+        /// Cleanup when ending the game.
+        /// </summary>
         private void EndTheGame()
         {
             if (!playArea.Children.Contains(gameOverText))
@@ -86,6 +96,11 @@ namespace SaveTheHumans
             }
         }
 
+        /// <summary>
+        /// Allow addition of enemies at specific intervals
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void enemyTimer_Tick(object sender, object e)
         {
             AddEnemy();
@@ -141,11 +156,19 @@ namespace SaveTheHumans
 
         #endregion
 
+        /// <summary>
+        /// When the startButton is clicked, start the game!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
             StartGame();
         }
 
+        /// <summary>
+        /// Reset the state when starting a new game.
+        /// </summary>
         private void StartGame()
         {
             human.IsHitTestVisible = true;
@@ -159,6 +182,9 @@ namespace SaveTheHumans
             targetTimer.Start();
         }
 
+        /// <summary>
+        /// Add a new enemy within the bounds of the playArea
+        /// </summary>
         private void AddEnemy()
         {
             ContentControl enemy = new ContentControl();
@@ -168,6 +194,13 @@ namespace SaveTheHumans
             playArea.Children.Add(enemy);
         }
 
+        /// <summary>
+        /// Set up animation for an enemy.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
+        /// <param name="from">Minimum value.</param>
+        /// <param name="to">Maximum value.</param>
+        /// <param name="propertyToAnimate">Either "(Canvas.Left)" or "(Canvas.Top)".</param>
         private void AnimateEnemy(ContentControl enemy, double from, double to, string propertyToAnimate)
         {
             Storyboard storyboard = new Storyboard() { AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever };
@@ -183,6 +216,11 @@ namespace SaveTheHumans
             storyboard.Begin();
         }
 
+        /// <summary>
+        /// When the mouse clicks on the human, capture it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void human_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             if (enemyTimer.IsEnabled)
@@ -192,6 +230,11 @@ namespace SaveTheHumans
             }
         }
 
+        /// <summary>
+        /// Collision detection for a human entering the target. When that happens, reset the progressBar and randomize human/target locations.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void target_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             if (targetTimer.IsEnabled && humanCaptured)
@@ -206,6 +249,11 @@ namespace SaveTheHumans
             }
         }
 
+        /// <summary>
+        /// Move the human with the mouse pointer movement (e.g. dragging).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void playArea_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
             if (humanCaptured)
@@ -226,6 +274,11 @@ namespace SaveTheHumans
             }
         }
 
+        /// <summary>
+        /// Dragging the human off the playArea ends the game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void playArea_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             if (humanCaptured)
