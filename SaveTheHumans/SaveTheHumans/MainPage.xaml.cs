@@ -192,6 +192,16 @@ namespace SaveTheHumans
             AnimateEnemy(enemy, 0, playArea.ActualWidth - 100, "(Canvas.Left)");
             AnimateEnemy(enemy, random.Next((int)playArea.ActualHeight - 100), random.Next((int)playArea.ActualHeight - 100), "(Canvas.Top)");
             playArea.Children.Add(enemy);
+
+            enemy.PointerEntered += enemy_PointerEntered;
+        }
+
+        void enemy_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (humanCaptured)
+            {
+                EndTheGame();
+            }
         }
 
         /// <summary>
