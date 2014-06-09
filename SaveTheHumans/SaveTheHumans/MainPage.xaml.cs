@@ -92,6 +92,7 @@ namespace SaveTheHumans
                 targetTimer.Stop();
                 humanCaptured = false;
                 startButton.Visibility = Visibility.Visible;
+                gameOverText.Visibility = Visibility.Visible;
                 playArea.Children.Add(gameOverText);
             }
         }
@@ -171,6 +172,10 @@ namespace SaveTheHumans
         /// </summary>
         private void StartGame()
         {
+            randomizePlacement(target);
+            target.Visibility = Visibility.Visible;
+            randomizePlacement(human);
+            human.Visibility = Visibility.Visible;
             human.IsHitTestVisible = true;
             humanCaptured = false;
             progressBar.Value = 0;
@@ -250,13 +255,21 @@ namespace SaveTheHumans
             if (targetTimer.IsEnabled && humanCaptured)
             {
                 progressBar.Value = 0;
-                Canvas.SetLeft(target, random.Next(100, (int)playArea.ActualWidth - 100));
-                Canvas.SetTop(target, random.Next(100, (int)playArea.ActualHeight - 100));
-                Canvas.SetLeft(human, random.Next(100, (int)playArea.ActualWidth - 100));
-                Canvas.SetTop(human, random.Next(100, (int)playArea.ActualHeight - 100));
+                randomizePlacement(target);
+                randomizePlacement(human);
                 humanCaptured = false;
                 human.IsHitTestVisible = true;
             }
+        }
+
+        /// <summary>
+        /// Randomly place a UIElement somewhere in the playArea
+        /// </summary>
+        /// <param name="element"></param>
+        private void randomizePlacement(UIElement element)
+        {
+            Canvas.SetLeft(element, random.Next(100, (int)playArea.ActualWidth - 100));
+            Canvas.SetTop(element, random.Next(100, (int)playArea.ActualHeight - 100));
         }
 
         /// <summary>
