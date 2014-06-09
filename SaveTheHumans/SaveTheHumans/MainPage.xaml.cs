@@ -1,6 +1,7 @@
 ﻿using SaveTheHumans.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -92,7 +93,15 @@ namespace SaveTheHumans
                 targetTimer.Stop();
                 humanCaptured = false;
                 startButton.Visibility = Visibility.Visible;
+
+                // place the gameOverText in the middle of the playArea
+                // however, had to hack this a little because ActualWidth/ActualHeight aren't populated yet,
+                // see http://stackoverflow.com/questions/13835690/how-to-calculate-actualwidth-actualheight-before-window-showing
                 gameOverText.Visibility = Visibility.Visible;
+                gameOverText.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                //Debug.WriteLine("{0}, {1}", gameOverText.DesiredSize.Width, gameOverText.DesiredSize.Height);
+                Canvas.SetLeft(gameOverText, (playArea.ActualWidth - gameOverText.ActualWidth) / 2);
+                Canvas.SetTop(gameOverText, (playArea.ActualHeight - gameOverText.ActualHeight) / 2);
                 playArea.Children.Add(gameOverText);
             }
         }

@@ -87,7 +87,7 @@
                 <Ellipse Fill="White" Height="10" Stroke="Black" Width="10"/>
                 <Rectangle Fill="White" Height="25" Stroke="Black" Width="10"/>
             </StackPanel>
-            <TextBlock x:Name="gameOverText" TextWrapping="Wrap" Text="Game Over" FontFamily="Arial Black" FontSize="100" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" HorizontalAlignment="Center" Canvas.Left="395" Canvas.Top="175" Visibility="Collapsed"/>
+            <TextBlock x:Name="gameOverText" TextWrapping="Wrap" Text="Game Over" FontFamily="Arial Black" FontSize="100" FontWeight="Bold" FontStyle="Italic" Visibility="Collapsed"/>
             <Rectangle x:Name="target" Height="50" Stroke="Black" Width="50" Canvas.Left="980" Canvas.Top="135" RenderTransformOrigin="0.5,0.5" PointerEntered="target_PointerEntered" Visibility="Collapsed">
                 <Rectangle.RenderTransform>
                     <CompositeTransform Rotation="45"/>
