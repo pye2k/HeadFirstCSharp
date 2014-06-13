@@ -16,5 +16,10 @@ namespace Chapter2Program4
         {
             InitializeComponent();
         }
+
+        private void changeText_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
