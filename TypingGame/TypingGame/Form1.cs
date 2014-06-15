@@ -27,13 +27,18 @@ namespace TypingGame
             if (listBox1.Items.Count > 7)
             {
                 listBox1.Items.Clear();
-                listBox1.Items.Add("Game over");
+                listBox1.Items.Add("Game over. Restart?");
                 timer1.Stop();
             }
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!timer1.Enabled)
+            {
+                RestartGame();
+            }
+
             // If the user pressed a key that's in the ListBox, remove it
             // and then make the game a little faster.
             if (listBox1.Items.Contains(e.KeyCode))
@@ -70,6 +75,15 @@ namespace TypingGame
             missedLabel.Text = "Missed: " + stats.Missed;
             totalLabel.Text = "Total: " + stats.Total;
             accuracyLabel.Text = "Accuracy: " + stats.Accuracy + "%";
+        }
+
+        private void RestartGame()
+        {
+            listBox1.Items.Clear();
+            stats = new Stats();
+            difficultyProgressBar.Value = 0;
+            timer1.Interval = 800;
+            timer1.Start();
         }
 
     }
