@@ -53,6 +53,17 @@ namespace Chapter3Project2
             UpdateForm();
         }
 
+        private void joeGives10ToBob_Click(object sender, EventArgs e)
+        {
+            bob.ReceiveCash(joe.GiveCash(10));
+            UpdateForm();
+        }
+
+        private void bobGives5ToJoe_Click(object sender, EventArgs e)
+        {
+            joe.ReceiveCash(bob.GiveCash(5));
+            UpdateForm();
+        }
     
     }
 }
