@@ -21,12 +21,8 @@ namespace Chapter3Project2
             InitializeComponent();
 
             // Set up Joe and Bob with money
-            joe = new Guy();
-            joe.Name = "Joe";
-            joe.Cash = 50;
-            bob = new Guy();
-            bob.Name = "Bob";
-            bob.Cash = 100;
+            joe = new Guy() { Name = "Joe", Cash = 50 };
+            bob = new Guy() { Name = "Bob", Cash = 100 };
 
             UpdateForm();
         }
