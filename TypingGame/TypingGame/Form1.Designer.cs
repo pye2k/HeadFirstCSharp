@@ -52,9 +52,11 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(856, 131);
             this.listBox1.TabIndex = 0;
+            this.listBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
             this.timer1.Interval = 800;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
@@ -96,7 +98,7 @@
             // 
             this.accuracyLabel.Name = "accuracyLabel";
             this.accuracyLabel.Size = new System.Drawing.Size(78, 17);
-            this.accuracyLabel.Text = "Aacuracy: 0%";
+            this.accuracyLabel.Text = "Accuracy: 0%";
             // 
             // toolStripStatusLabel1
             // 
@@ -108,6 +110,7 @@
             // 
             // difficultyProgressBar
             // 
+            this.difficultyProgressBar.Maximum = 800;
             this.difficultyProgressBar.Name = "difficultyProgressBar";
             this.difficultyProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
