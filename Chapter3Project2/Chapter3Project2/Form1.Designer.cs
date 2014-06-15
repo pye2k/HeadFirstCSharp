@@ -70,6 +70,7 @@
             this.give10ToJoe.TabIndex = 3;
             this.give10ToJoe.Text = "Give $10 to Joe";
             this.give10ToJoe.UseVisualStyleBackColor = true;
+            this.give10ToJoe.Click += new System.EventHandler(this.give10ToJoe_Click);
             // 
             // receive5FromBob
             // 
@@ -79,17 +80,20 @@
             this.receive5FromBob.TabIndex = 4;
             this.receive5FromBob.Text = "Receive $5 from Bob";
             this.receive5FromBob.UseVisualStyleBackColor = true;
+            this.receive5FromBob.Click += new System.EventHandler(this.receive5FromBob_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(281, 155);
             this.Controls.Add(this.receive5FromBob);
             this.Controls.Add(this.give10ToJoe);
             this.Controls.Add(this.bankCashLabel);
             this.Controls.Add(this.bobsCashLabel);
             this.Controls.Add(this.joesCashLabel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
